@@ -8,7 +8,9 @@
         }
     ],
     "autoload": {
-        "classmap": ["src/app/"],
+        "classmap": [
+            "src/app/"
+        ],
         "psr-4": {
             "VCComponent\\Laravel\\Mail\\": "src/app/"
         }
@@ -28,13 +30,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "extra": {
-        "laravel": {
-            "providers": [
-                "VCComponent\\Laravel\\Mail\\Providers\\MailConfigServiceProvider"
-            ]
-        }
-    },
     "scripts": {
         "test": [
             "vendor/bin/phpunit --color=always"
