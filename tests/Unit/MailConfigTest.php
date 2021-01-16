@@ -1,6 +1,6 @@
 <?php
 
-namespace VCComponent\Laravel\Mail\Test;
+namespace VCComponent\Laravel\Mail\Test\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
