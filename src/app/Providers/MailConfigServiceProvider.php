@@ -9,6 +9,7 @@ use VCComponent\Laravel\Mail\Facades\MailConfig;
 use VCComponent\Laravel\Mail\Repositories\MailRepository;
 use VCComponent\Laravel\Mail\Repositories\MailRepositoryEloquent;
 use VCComponent\Laravel\Mail\Services\MailConfigService;
+use Exception;
 
 class MailConfigServiceProvider extends ServiceProvider
 {
