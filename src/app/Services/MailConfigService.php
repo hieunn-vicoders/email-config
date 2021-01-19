@@ -11,28 +11,30 @@ class MailConfigService
 {
     public function getConfigFromDB()
     {
-        try {
-            $configs = [];
-            if (Schema::hasTable('mails')) {
-                $mail = DB::table('mails')->first();
-                if ($mail) {
-                    $configs = array(
-                        'driver'     => $mail->driver,
-                        'host'       => $mail->host,
-                        'port'       => $mail->port,
-                        'from'       => array('address' => $mail->from_address, 'name' => $mail->from_name),
-                        'encryption' => $mail->encryption,
-                        'username'   => $mail->username,
-                        'password'   => $mail->password,
-                        'sendmail'   => '/usr/sbin/sendmail -bs',
-                    );
-                }
+        $configs = Config::get('mail');
+        if (Schema::hasTable('mails')) {
+            $mail = DB::table('mails')->first();
+            if ($mail) {
+                $configs = array_merge($configs, [
+                    'mailers' => [
+                        'smtp' => [
+                            'transport'  => $mail->driver,
+                            'host'       => $mail->host,
+                            'port'       => $mail->port,
+                            'encryption' => $mail->encryption,
+                            'username'   => $mail->username,
+                            'password'   => $mail->password,
+                        ],
+                    ],
+                    'from'    => [
+                        'address' => $mail->from_address,
+                        'name'    => $mail->from_name,
+                    ],
+                ]);
             }
-
-            return $configs;
-        } catch (Exception $e) {
-            throw $e;
         }
+
+        return $configs;
     }
 
     public function setConfig(array $configs)
