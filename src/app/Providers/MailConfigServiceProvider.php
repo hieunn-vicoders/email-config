@@ -24,7 +24,9 @@ class MailConfigServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'mail');
 
-        $this->configMail();
+        try {
+            $this->configMail();
+        } catch (Exception $e) {}
     }
 
     private function configMail()
