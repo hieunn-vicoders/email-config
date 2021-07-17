@@ -9,7 +9,6 @@ use VCComponent\Laravel\Mail\Repositories\MailRepository;
 use VCComponent\Laravel\Mail\Transformers\MailTransformer;
 use VCComponent\Laravel\Mail\Validators\MailValidator;
 use VCComponent\Laravel\Vicoders\Core\Controllers\ApiController;
-use VCComponent\Laravel\Vicoders\Core\Exceptions\PermissionDeniedException;
 
 class MailController extends ApiController
 {
@@ -18,9 +17,9 @@ class MailController extends ApiController
 
     public function __construct(MailRepository $repository, MailValidator $validator)
     {
-        $this->repository  = $repository;
-        $this->entity      = $repository->getEntity();
-        $this->validator   = $validator;
+        $this->repository = $repository;
+        $this->entity = $repository->getEntity();
+        $this->validator = $validator;
         $this->transformer = MailTransformer::class;
 
         $user = $this->getAuthenticatedUser();
