@@ -1,12 +1,10 @@
 {
     "name": "webpress/email-config",
     "description": "Vicoders package for email config",
-    "authors": [
-        {
-            "name": "quanghuy",
-            "email": "quanghuyhg007@gmail.com"
-        }
-    ],
+    "authors": [{
+        "name": "quanghuy",
+        "email": "quanghuyhg007@gmail.com"
+    }],
     "autoload": {
         "classmap": [
             "src/app/"
@@ -21,6 +19,7 @@
         }
     },
     "require": {
+        "webpress/user-manager": "^3.0",
         "webpress/core": "^3.0"
     },
     "require-dev": {
