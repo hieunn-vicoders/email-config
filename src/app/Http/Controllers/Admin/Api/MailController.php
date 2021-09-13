@@ -4,6 +4,7 @@ namespace VCComponent\Laravel\Mail\Http\Controllers\Api\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Gate;
 use VCComponent\Laravel\Mail\Mail\TestMailConfigNotify;
 use VCComponent\Laravel\Mail\Repositories\MailRepository;
 use VCComponent\Laravel\Mail\Transformers\MailTransformer;
@@ -23,7 +24,7 @@ class MailController extends ApiController
         $this->transformer = MailTransformer::class;
 
         $user = $this->getAuthenticatedUser();
-        if (!$this->entity->ableToUse($user)) {
+        if (Gate::forUser($user)->denies('manage-email-config')) {
             throw new PermissionDeniedException();
         }
     }

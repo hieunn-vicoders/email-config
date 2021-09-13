@@ -10,6 +10,9 @@ use VCComponent\Laravel\Mail\Repositories\MailRepository;
 use VCComponent\Laravel\Mail\Repositories\MailRepositoryEloquent;
 use VCComponent\Laravel\Mail\Services\MailConfigService;
 use Exception;
+use VCComponent\Laravel\EmailConfig\Providers\EmailConfigAuthServiceProvider;
+use VCComponent\Laravel\Mail\Contracts\EmailConfigPolicyInterface;
+use VCComponent\Laravel\Mail\Policies\EmailConfigPolicy;
 
 class MailConfigServiceProvider extends ServiceProvider
 {
@@ -17,6 +20,9 @@ class MailConfigServiceProvider extends ServiceProvider
     {
         $this->app->bind(MailRepository::class, MailRepositoryEloquent::class);
         $this->app->bind('mailConfig', MailConfigService::class);
+        $this->app->bind(EmailConfigPolicyInterface::class, EmailConfigPolicy::class);
+
+        $this->app->register(EmailConfigAuthServiceProvider::class);
     }
 
     public function boot()
