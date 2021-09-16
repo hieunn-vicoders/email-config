@@ -24,7 +24,7 @@ class MailController extends ApiController
         $this->transformer = MailTransformer::class;
 
         $user = $this->getAuthenticatedUser();
-        if (Gate::forUser($user)->denies('manage-email-config')) {
+        if (Gate::forUser($user)->denies('manage', $this->entity)) {
             throw new PermissionDeniedException();
         }
     }

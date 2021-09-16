@@ -6,8 +6,15 @@ use VCComponent\Laravel\Mail\Contracts\EmailConfigPolicyInterface;
 
 class EmailConfigPolicy implements EmailConfigPolicyInterface
 {
-    public function ableToUse($user)
+    public function before($user, $ability)
     {
-        return true;
+        if ($user->isAdministrator()) {
+            return true;
+        }
+    }
+
+    public function manage($user)
+    {
+        return $user->hasPermission('manage-email-config');
     }
 }

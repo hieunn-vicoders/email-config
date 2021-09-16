@@ -4,6 +4,8 @@ namespace VCComponent\Laravel\EmailConfig\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use VCComponent\Laravel\Mail\Contracts\EmailConfigPolicyInterface;
+use VCComponent\Laravel\Mail\Entities\Mail;
 
 class EmailConfigAuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class EmailConfigAuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        //
+        Mail::class => EmailConfigPolicyInterface::class,
     ];
 
     /**
@@ -24,8 +26,6 @@ class EmailConfigAuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::define('manage-email-config', 'VCComponent\Laravel\Mail\Contracts\EmailConfigPolicyInterface@ableToUse');
         //
     }
 }
